@@ -1,3 +1,4 @@
+from typing import Optional
 from fastapi import FastAPI
 
 app = FastAPI()
@@ -26,3 +27,8 @@ async def food(food_name: str = "curry", food_price: int = 100):
 @app.get("/food/{food_name}")
 async def food(food_name: str, food_price: int = 100):
     return {"food_name": food_name, "food_price": food_price}
+
+
+@app.get("/drink/")
+async def food(drink_name: Optional[str] = None, drink_price: Optional[int] = None):
+    return {"drink_name": drink_name, "drink_price": drink_price}
