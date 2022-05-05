@@ -1,6 +1,11 @@
-from typing import Optional
+from typing import Optional, List
 from fastapi import FastAPI
 from pydantic import BaseModel
+
+
+class SportShop(BaseModel):
+    name: str
+    url: str
 
 
 class Item(BaseModel):
@@ -8,6 +13,11 @@ class Item(BaseModel):
     description: Optional[str] = None
     price: int
     tax: Optional[float]
+
+
+class Data(BaseModel):
+    sport_shop: Optional[SportShop] = None
+    items: List[Item]
 
 
 app = FastAPI()
@@ -46,3 +56,8 @@ async def food(drink_name: Optional[str] = None, drink_price: Optional[int] = No
 @app.post("/items/")
 async def create_item(item: Item):
     return {"message": f"{item.name}は{(int)(item.price*item.tax)}円"}
+
+
+@app.post("/data/")
+async def data(data: Data):
+    return {"data": data}
