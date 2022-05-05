@@ -16,3 +16,8 @@ async def sport():
 @app.get("/sports/{sport_name}")
 async def sport(sport_name: str):
     return {"sport_name": sport_name}
+
+
+@app.get("/food/")
+async def food(food_name: str = "curry", food_price: int = 100):
+    return {"food_name": food_name, "food_price": food_price}
